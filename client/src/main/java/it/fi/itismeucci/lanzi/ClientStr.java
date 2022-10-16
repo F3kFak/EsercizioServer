@@ -35,12 +35,13 @@ public class ClientStr {
                 for (;;) {
                 System.out.println("4 ... inserisci la stringa da trasmettere al server" + '\n');
                 StringaUtente = tastiera.readLine();
-                if (!StringaUtente.equals("fine")) {
+                if (!StringaUtente.equals("fine") && !StringaUtente.equals("spegni")) {
                     System.out.println("5 ... invio la stringa al server e attendo ... ");
                     outVersoServer.writeBytes(StringaUtente + '\n');
                     StringaRicevutaDalServer = inDalServer.readLine();
                     System.out.println("8 ... risposta dal server " + '\n' + StringaRicevutaDalServer);
-                } else {
+                }
+                else {
                     outVersoServer.writeBytes(StringaUtente + '\n');
                     miosocket.close();
                     System.out.println("FINE");
