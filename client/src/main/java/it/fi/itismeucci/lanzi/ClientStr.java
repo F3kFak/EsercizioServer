@@ -4,7 +4,7 @@ import java.io.*;
 import java.net.*;
 
 public class ClientStr {
-
+    
     String nomeServer = "localhost"; // indirizzo server locale
     int portaServer = 12121; // porta x servizio data e ora
     Socket miosocket;
@@ -14,6 +14,7 @@ public class ClientStr {
     DataOutputStream outVersoServer; // stream output
     BufferedReader inDalServer; // stream input
 
+    /*
     public Socket connetti() {
         System.out.println("2 CLIENT partito in esecuzione ...");
         try {
@@ -27,11 +28,17 @@ public class ClientStr {
 
         }
         return miosocket;
-    }
+    }*/
 
-    public void comunica() throws Exception {
+    public void comunica() throws IOException {
         
-            try {
+        Comunica C1 = new Comunica();
+        ThreadInput ti = new ThreadInput(C1);
+        ThreadOutput to = new ThreadOutput(C1);
+
+        to.start();
+        ti.start();
+            /*try {
                 for (;;) {
                 System.out.println("4 ... inserisci la stringa da trasmettere al server" + '\n');
                 StringaUtente = tastiera.readLine();
@@ -53,7 +60,7 @@ public class ClientStr {
                 System.out.println(e.getMessage());
                 System.out.println("Errore durante la connessione");
                 System.exit(1);
-            }
+            }*/
     }
 }
 

@@ -40,6 +40,8 @@ public class ServerStr {
                     outVersoClient.writeBytes(StringaModificata + '\n');
                 } else if (StringaRicevuta.equals("spegni")) {
                     for (Socket i : SS) {
+                        DataOutputStream nb = new DataOutputStream(i.getOutputStream());
+                        nb.writeBytes("spegni" + '\n');
                         i.close();
                     }
                     System.out.println("CHIUSO SERVER");
