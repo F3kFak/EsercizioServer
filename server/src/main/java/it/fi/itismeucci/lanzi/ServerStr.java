@@ -2,8 +2,11 @@ package it.fi.itismeucci.lanzi;
 
 import java.io.*;
 import java.net.*;
+import java.util.ArrayList;
 
 public class ServerStr {
+
+    ArrayList<Socket>SS = new ArrayList<>();
 
     public void avvia() throws IOException {
         System.out.println("1 Server partito in esecuzione ... ");
@@ -12,6 +15,7 @@ public class ServerStr {
             Socket client;
             try {
                 client = server.accept();
+                SS.add(client);
                 Thread t = new Thread(() -> comunica(client, server));
                 t.start();
             } catch (Exception e) {
@@ -35,7 +39,10 @@ public class ServerStr {
                     System.out.println("7 invio la stringa modificata al client ...");
                     outVersoClient.writeBytes(StringaModificata + '\n');
                 } else if (StringaRicevuta.equals("spegni")) {
-                    client.close();
+                    for (Socket i : SS) {
+                        i.close();
+                    }
+                    System.out.println("CHIUSO SERVER");
                     server.close();
                     break;
                 } 
